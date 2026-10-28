@@ -1,6 +1,7 @@
 # Peer Review Comparison
 
-Partner: <name / roll no>
+Inspector: Rabbia Waseem (SP2024/BSSE/052)
+Partner: ____________________
 
 ## Defects found by partner that I missed
 
