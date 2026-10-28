@@ -1,1 +1,32 @@
+# Defect Log: PSVS-REQ-v1.0 (baseline-1)
 
+Total defects: 26. Cross-requirement defects: D04, D07, D11, D12, D17, D20.
+
+| Defect ID | Req ID | Category | Description | Evidence | Severity | Suggested fix | Status |
+|---|---|---|---|---|---|---|---|
+| D01 | S1 | Ambiguity | "Registered" is undefined: who registers depositors, how, and what happens to boxes if registration is revoked. | "only from registered depositors" | Medium | Define the registration process and registry, and the effect of deregistration. | Open |
+| D02 | S1 | Incompleteness | No behaviour for a rejected deposit and no statement of how identity is checked at deposit time. | S1 only states what is accepted | Medium | Reject and log deposits from unregistered depositors. | Open |
+| D03 | S2 | Vagueness | "A large number" has no value, so it cannot be designed for or tested. | "can hold a large number of boxes" | Medium | Remove S2 or give a number. | Open |
+| D04 | S2, S3 | Redundancy | S2 is already covered by the exact limits in S3. | S2 vs S3 | Low | Delete S2 and keep S3. | Open |
+| D05 | S3 | Incompleteness | Only chambers 1-4 have limits although the scenario says "several" chambers. No rule for a full chamber or for choosing the chamber. | "Chambers 1-3 ... Chamber 4 ..." | Medium | State the number of chambers and add rules for a full chamber and chamber assignment. | Open |
+| D06 | S4 | Ambiguity | The depositor is an institution but people perform withdrawals. Authorised representatives and ownership transfer (merger, closure) are not covered. | "only that depositor may withdraw it" | Medium | Define authorised representatives and an ownership-transfer procedure. | Open |
+| D07 | S4, S5 | Contradiction | S4 says only the owner may withdraw; S5 lets the vault authority release any box to any party. | S4 "only that depositor" vs S5 "any box to any requesting party" | High | Rewrite S4 as "only that depositor, except under S5" and restrict S5's conditions. | Open |
+| D08 | S5 | Ambiguity | "Emergency" and "vault authority" are undefined; unclear who declares an emergency. | "In an emergency, the vault authority" | High | Define emergency types, the declaring role and the authority. | Open |
+| D09 | S5 | Incompleteness | "Any requesting party" is unrestricted. No requester verification, depositor notification, ownership after release or logging. | "any requesting party" | High | Add requester checks, notification, ownership rules and a mandatory audit entry. | Open |
+| D10 | S6 | Vagueness | "Safe temperature" has no value or range. | "stored at a safe temperature" | High | Give a target temperature and upper limit, consistent with S7. | Open |
+| D11 | S6, S7 | Redundancy | S7 is a concrete form of S6; S6 adds nothing testable and the link is not stated. | S6 vs S7 | Low | Merge S6 into S7 or state that S7 refines S6. | Open |
+| D12 | S7, S8 | Contradiction | S7 says never above -18°C but S8 allows warming to 0°C. | S7 "never rise above -18°C" vs S8 "warmed to 0°C" | High | Change S7 to "except during authorised maintenance (S8)" and limit maintenance warming. | Open |
+| D13 | S7 | Non-verifiability | "Never" cannot be shown by testing. No sensor, sampling interval, tolerance or response when the limit is exceeded. | "shall never rise above" | Medium | Specify monitoring interval, tolerance and alarm response time. | Open |
+| D14 | S8 | Incompleteness | No authoriser, maximum duration, handling of boxes during maintenance or depositor notification. | "may be warmed to 0°C" | High | Add authorisation, duration limit, box handling and notification. | Open |
+| D15 | S9 | Vagueness | "Low viability" has no threshold and "promptly" has no time limit. | "low viability ... flagged promptly" | High | Give a viability threshold per species and a time limit. | Open |
+| D16 | S9 | Incompleteness | Does not say who tests viability, how often, who receives the flag or who performs regeneration. | "flagged promptly for regeneration" | Medium | Define test schedule, recipient of the flag and regeneration responsibility. | Open |
+| D17 | S9, S4, S10 | Contradiction | Regeneration needs a withdrawal, but S4 allows only the depositor and S10 may block it once the quota is used. | S9 vs S4 vs S10 | Medium | State whether regeneration withdrawals are exempt from S10 and who may trigger them. | Open |
+| D18 | S10 | Ambiguity | Unclear whether 20% is of the current holding or the start-of-year holding, whether the year is calendar or rolling, and how rounding works. | "at most 20% of its boxes of a species per year" | Medium | Fix the base, the year definition and the rounding rule. | Open |
+| D19 | S10 | Infeasibility | With fewer than 5 boxes of a species, 20% is less than one box, so nothing could be withdrawn. | 20% of 4 boxes = 0.8 box | Low | Allow a minimum of one box per year or round up. | Open |
+| D20 | S5, S10 | Contradiction | Unclear whether emergency releases count toward the 20% limit; read literally, "any box" conflicts with the cap. | S5 "release any box" vs S10 "at most 20%" | Medium | State that S5 releases are outside the S10 quota. | Open |
+| D21 | S11 | Ambiguity | "Re-inspection" is undefined: who performs it, what is checked and what counts as a pass. | "only after re-inspection" | Medium | Define procedure, inspector role and pass criteria. | Open |
+| D22 | S11 | Incompleteness | No rule for a failed re-inspection, and it is not stated whether redeposit must again satisfy S1 and S3. | "withdrawn box may be redeposited" | Medium | Add the failure outcome and state that redeposit follows normal deposit rules. | Open |
+| D23 | S12 | Non-verifiability | "Good" audit trail cannot be measured. | "a good audit trail" | High | Replace with measurable properties: every listed event recorded, records cannot be altered. | Open |
+| D24 | S12 | Incompleteness | No list of logged actions, stored fields, retention period or access rules. | "all actions" | Medium | List events and required fields (who, what, when), retention and access. | Open |
+| D25 | S1-S12 | Untraceability | No source, stakeholder, priority or rationale for any requirement. | S1-S12 is a flat list | Low | Add source and rationale columns and a traceability matrix. | Open |
+| D26 | S1-S12 | Incompleteness | The scenario says each box holds one species but no requirement enforces it (S10 depends on it). Staff roles and the withdrawal procedure are not specified. | Scenario text vs S1-S12 | Medium | Add requirements for one species per box and for staff roles and permissions. | Open |
